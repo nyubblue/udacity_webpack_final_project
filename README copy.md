@@ -32,11 +32,11 @@ Remember that once you clone, you will still need to install everything:
 
 - install list dependency:
 
-* install express
-  npm install express
-
 * install webpack-dev-server
   npm install webpack-dev-server --save-dev
+
+* install express
+  npm install express
 
 * install webpack and extensions:
   npm install webpack webpack-cli --save-dev
@@ -49,3 +49,10 @@ Remember that once you clone, you will still need to install everything:
 
 * Tip for utils in js :
   npm install --save lodash
+
+* set up Environment variables :
+  npm install dotenv
+
+* add library for AYLIEN's APIs
+npm install aylien_textapi
+

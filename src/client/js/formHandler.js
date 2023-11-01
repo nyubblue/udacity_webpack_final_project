@@ -1,15 +1,22 @@
+import { postData } from "./connectUtil"
+import { checkForName } from "./nameChecker"
+import { updateUI } from "./updateResult"
+
 function handleSubmit(event) {
     event.preventDefault()
 
     // check what text was put into the form field
     let formText = document.getElementById('name').value
-    checkForName(formText)
+    if(!checkForName(formText)) {
+        alert("Input is not empty!");
+        return false;
+    }
 
     console.log("::: Form Submitted :::")
-    fetch('http://localhost:8080/test')
-    .then(res => res.json())
+    postData('http://localhost'+':8081/sentiment', {txt: formText})
     .then(function(res) {
-        document.getElementById('results').innerHTML = res.message
+        document.getElementById('results').innerHTML = "";
+        document.getElementById('results').appendChild(updateUI(res));
     })
 }
 
