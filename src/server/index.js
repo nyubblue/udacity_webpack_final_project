@@ -1,7 +1,7 @@
 var path = require('path')
 const express = require('express')
-var bodyParser = require('body-parser')
-var cors = require('cors')
+const bodyParser = require('body-parser')
+const cors = require('cors')
 
 //configure env variables
 const dotenv = require('dotenv');
@@ -21,7 +21,7 @@ app.use(cors())
 app.use(bodyParser.json())
 // to use url encoded values
 app.use(bodyParser.urlencoded({
-  extended: true
+    extended: true
 }))
 
 app.use(express.static('dist'))
@@ -36,10 +36,10 @@ app.post('/sentiment', callApiAylien);
 function callApiAylien(req, res) {
     let dataTxt = req.body.txt;
     connectSentimentAPI(baseURL, apiKey, selectAdd, dataTxt, lang)
-    .then(function(data){
-        projectData = data;
-        res.send(projectData);
-    })
+        .then(function (data) {
+            projectData = data;
+            res.send(projectData);
+        })
 }
 
 // designates what port the app will listen to for incoming requests

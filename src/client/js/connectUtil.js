@@ -16,4 +16,4 @@ const postData = async (url = '', data = {}) => {
     }
 }
 
-export {postData}
+export { postData }
