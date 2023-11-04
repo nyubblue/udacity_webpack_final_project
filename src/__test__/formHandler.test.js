@@ -40,7 +40,7 @@ const data = {
       { status: { code: '212', msg: 'no content to analyze', credits: '0' } }
   },
   case3: {
-    in: "42323",
+    in: "123",
     out:
     {
       agreement: 'AGREEMENT',
@@ -70,13 +70,10 @@ const data = {
 
   }
 }
-const fakeDataFnc = async (a) => {
 
-  return await (data.case1.out);
-}
 jest.mock('../client/js/connectUtil');
 
-test('should return false if form input is empty', () => {
+test(`should return false if form input is ${data.case1.in}`, () => {
   // Create a mock event object
   const event = { preventDefault: jest.fn() };
 
@@ -87,28 +84,78 @@ test('should return false if form input is empty', () => {
     <div id="results">Init</div>
     </div>`
 
-  //const postData = require('../client/js/connectUtil');
+    const fakeDataFnc = async (a) => {
+
+      return await (data.case1.out);
+    }
 
   postData.mockImplementation(fakeDataFnc);
   postData('1', '2');
   // Call the handleSubmit function with an empty form input
-  handleSubmit(event);
-  const agreeDiv = document.getElementById('results');
-  console.log("debugger " + agreeDiv);
-  expect(agreeDiv.id).toBe('AGREEMENT')
-  // Expect the result to be false
-  //expect(result).toBe(false);
+  let agreeDiv = null;
+  var handle = async () => {
+    await handleSubmit(event);
+  };
+  handle().then(()=>{
+    agreeDiv = document.getElementById('agreement');
+    expect(agreeDiv.textContent).toBe('Agreement: agreement')
+  })
 });
 
-/*
-test('should return false if form input is empty', () => {
-    // Create a mock event object
-    const event = { preventDefault: jest.fn() };
-  
-    // Call the handleSubmit function with an empty form input
-    const result = handleSubmit(event);
-  
-    // Expect the result to be false
-    expect(result).toBe(false);
-  });
-  */
+test(`should return false if form input is ${data.case2.in}`, () => {
+  // Create a mock event object
+  const event = { preventDefault: jest.fn() };
+
+  // Set up our document body
+  document.body.innerHTML =
+    `<div>
+    <input type ="text" id="name" value="${data.case2.in}" />
+    <div id="results">Init</div>
+    </div>`
+
+    const fakeDataFnc = async (a) => {
+
+      return await (data.case2.out);
+    }
+
+  postData.mockImplementation(fakeDataFnc);
+  postData('1', '2');
+  // Call the handleSubmit function with an empty form input
+  let agreeDiv = null;
+  var handle = async () => {
+    await handleSubmit(event);
+  };
+  handle().then(()=>{
+    agreeDiv = document.getElementById('agreement');
+    expect(agreeDiv.textContent).toBe(data.case2.out.status.msg)
+  })
+});
+
+test(`should return false if form input is ${data.case3.in}`, () => {
+  // Create a mock event object
+  const event = { preventDefault: jest.fn() };
+
+  // Set up our document body
+  document.body.innerHTML =
+    `<div>
+    <input type ="text" id="name" value="${data.case3.in}" />
+    <div id="results">Init</div>
+    </div>`
+
+    const fakeDataFnc = async (a) => {
+
+      return await (data.case3.out);
+    }
+
+  postData.mockImplementation(fakeDataFnc);
+  postData('1', '2');
+  // Call the handleSubmit function with an empty form input
+  let agreeDiv = null;
+  var handle = async () => {
+    await handleSubmit(event);
+  };
+  handle().then(()=>{
+    agreeDiv = document.getElementById('agreement');
+    expect(agreeDiv.textContent).toBe('Agreement: agreement');
+  })
+});

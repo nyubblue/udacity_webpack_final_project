@@ -8,7 +8,6 @@ const updateUI = (newData) => {
         divAgree.classList.add('result-data');
         divAgree.id = 'agreement';
         frameData.appendChild(divAgree);
-        console.log("Debug " + divAgree.id);
 
         let divconfidence = document.createElement('div');
         divconfidence.textContent = `Confidence: ${newData.confidence}%`;
@@ -31,6 +30,7 @@ const updateUI = (newData) => {
         } else {
             divErr.textContent = `${newData.status.msg}`;
         }
+        divErr.id = 'agreement';
         divErr.classList.add("error-msg");
         frameData.appendChild(divErr);
     }

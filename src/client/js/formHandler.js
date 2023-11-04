@@ -12,10 +12,9 @@ function handleSubmit(event) {
         return false;
     }
 
-    console.log("::: Form Submitted :::")
     postData('http://localhost' + ':8081/sentiment', { txt: formText })
         .then(function (res) {
-            console.log("::: Form Submitted Return OK::: " + res.status.code + res)
+            //console.log("::: Form Submitted Return OK::: " + res.status.code + res)
             document.getElementById('results').innerHTML = "";
             document.getElementById('results').appendChild(updateUI(res));
         })
