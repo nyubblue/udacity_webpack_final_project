@@ -7,17 +7,18 @@ function handleSubmit(event) {
 
     // check what text was put into the form field
     let formText = document.getElementById('name').value
-    if(!checkForName(formText)) {
+    if (!checkForName(formText)) {
         alert("Input is not empty!");
         return false;
     }
 
     console.log("::: Form Submitted :::")
-    postData('http://localhost'+':8081/sentiment', {txt: formText})
-    .then(function(res) {
-        document.getElementById('results').innerHTML = "";
-        document.getElementById('results').appendChild(updateUI(res));
-    })
+    postData('http://localhost' + ':8081/sentiment', { txt: formText })
+        .then(function (res) {
+            console.log("::: Form Submitted Return OK::: " + res.status.code + res)
+            document.getElementById('results').innerHTML = "";
+            document.getElementById('results').appendChild(updateUI(res));
+        })
 }
 
 export { handleSubmit }
